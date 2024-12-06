@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: auto;
+    padding: 0 0;
+    color: black;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color:rgb(32, 31, 31);
+    width: auto;
+   
+}
+
+header .navigacioni {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    
+}
+
+header nav a {
+    margin: 20px 40px;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+
