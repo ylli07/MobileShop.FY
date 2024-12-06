@@ -30,4 +30,43 @@ header nav a {
     font-weight: bold;
 }
 
+.klasa-produkteve {
+    background-image: url(../../../Desktop/mainback.jfif);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.boxi-produkteve {
+    background-image: url(../../../Desktop/back.jfif);
+    border-radius: 10px;
+    width: 300px; 
+    height: 350px; 
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.boxi-produkteve img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.boxi-produkteve h3 {
+    font-size: 24px;
+    margin: 10px 0;
+    color: black;
+}
+
+.boxi-produkteve p {
+    font-size: 21px;
+    color: black;
+    font-weight: bold;
+}
 
