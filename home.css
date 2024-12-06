@@ -184,3 +184,70 @@ header nav a {
     font-size: 18px;
     padding: 8px 15px;
 }
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .klasa-produkteve {
+        flex-direction: column;
+        gap: 30px;
+        margin: 0 20px;
+    }
+
+    .produktet {
+        width: 100%;
+    }
+
+    .klasa-serviseve {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ballina h1 {
+        font-size: 30px;
+    }
+
+    .ballina p {
+        font-size: 18px;
+    }
+
+    header {
+        padding: 10px;
+    }
+
+    header .navigacioni {
+        font-size: 18px;
+    }
+
+    header nav a {
+        font-size: 16px;
+        margin: 5px 0;
+    }
+
+    .klasa-produkteve {
+        gap: 20px;
+    }
+
+    .serviset {
+        max-width: 100%;
+    }
+
+    .seksioni-contact h2 {
+        font-size: 28px;
+    }
+
+    .seksioni-contact p {
+        font-size: 16px;
+    }
+}
