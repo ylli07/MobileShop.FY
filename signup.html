@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign-Up Form</title>
     <link rel="stylesheet" href="signup.css">
+    <script>
+        function validateForm(event) {
+            var fullname = document.getElementById('fullname').value;
+            var email = document.getElementById('email').value;
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+
+            var fullnamePattern = /^[a-zA-Z\s]+$/;
+            var usernamePattern = /^[a-zA-Z0-9]+$/;
+            var passwordPattern = /^[a-zA-Z0-9]+$/;
+
+
 </head>
 <body>
     <div class="klasa-signup">
