@@ -17,12 +17,46 @@
             var usernamePattern = /^[a-zA-Z0-9]+$/;
             var passwordPattern = /^[a-zA-Z0-9]+$/;
 
+            if (!fullnamePattern.test(fullname)) {
+                alert("Full Name can only contain letters and spaces.");
+                event.preventDefault();
+                return false;
+            }
+
+            if (!email) {
+                alert("Please enter a valid email.");
+                event.preventDefault();
+                return false;
+            }
+
+            if (!usernamePattern.test(username)) {
+                alert("Username can only contain letters and numbers.");
+                event.preventDefault();
+                return false;
+            }
+
+            if (!passwordPattern.test(password)) {
+                alert("Password can only contain letters and numbers.");
+                event.preventDefault();
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Password and Confirm Password must match.");
+                event.preventDefault();
+                return false;
+            }
+
+            return true;
+        }
+</script>
+
 
 </head>
 <body>
     <div class="klasa-signup">
         <h1>Sign Up</h1>
-        <form action="home.html" method="POST">
+        <form action="home.html" method="POST" onsubmit="return validateForm(event)">
             <label for="fullname">Full Name</label>
             <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
 
