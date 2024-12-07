@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("fotot e projektit/backgroundgreenblack.jfif");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 700px;
+}
+
+.klasa-login {
+    width: 300px;
+    background-image: url("fotot e projektit/backgroundgreengrey.jfif");
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.klasa-login h1 {
+    margin-bottom: 20px;
+    font-size: 23px;
+    color:black;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 10px 5px;
+    font-weight: bold;
+    font-size: 17px;
+    color: black;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-bottom: 15px;
+    
+}
+
+button {
+    padding: 10px;
+    background-color: rgb(26, 24, 24);
+    color: white;
+    font-size: 20px;
+    border-radius: 25px;
+    
+    
+}
+
+.signup-link {
+    margin-top: 20px;
+    font-size: 15px;
+    color: #555;
+}
+
+.signup-link a {
+    color: black;
+    font-weight: bold;
+}
