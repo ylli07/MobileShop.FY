@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
     <link rel="stylesheet" href="login.css">
+    <script>
+        
+        function validateForm(event) {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var usernamePattern = /^[a-zA-Z0-9]+$/;
+            var passwordPattern = /^[a-zA-Z0-9]+$/;
+            
+            
+            if (!usernamePattern.test(username)) {
+                alert("Username can only contain letters and numbers.");
+                event.preventDefault(); 
+                return false;
+            }
+            
+            if (!passwordPattern.test(password)) {
+                alert("Password can only contain letters and numbers.");
+                event.preventDefault(); 
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </head>
 <body>
     <div class="klasa-login">
