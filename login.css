@@ -3,14 +3,28 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     background-image: url("fotot e projektit/backgroundgreenblack.jfif");
+    background-size: cover;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 700px;
+    min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    padding-top: 80px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 .klasa-login {
-    width: 300px;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px;
     background-image: url("fotot e projektit/backgroundgreengrey.jfif");
     padding: 20px;
     border-radius: 10px;

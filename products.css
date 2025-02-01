@@ -1,20 +1,30 @@
 body {
     font-family: Arial, sans-serif;
-    margin: auto;
-    padding: 0 0;
+    margin: 0;
+    padding: 0;
     color: black;
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-
-
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 .klasa-produkteve {
     background-image: url("fotot e projektit/backgroundgreenblack.jfif");
+    background-size: cover;
+    background-attachment: fixed;
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 20px;
     justify-content: center;
-    padding: 40px 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .boxi-produkteve {
@@ -101,6 +111,6 @@ body {
     }
 
     .boxi-produkteve p {
-        font-size: 16px;
+        font-size: 16px;
     }
 }

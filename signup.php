@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign-Up Form</title>
-    <link rel="stylesheet" href="login.css">
+    <title>Sign Up - F&Y Mobile Shop</title>
+    <link rel="stylesheet" href="simple-nav.css">
+    <link rel="stylesheet" href="signup.css">
     <script>
         function validateForm(event) {
             var fullname = document.getElementById('fullname').value;
@@ -52,6 +53,7 @@
     </script>
 </head>
 <body>
+    <?php include 'simple-nav.php'; ?>
     <div class="klasa-login">
         <h1>Regjistrohu</h1>
         <form action="register_process.php" method="POST" onsubmit="return validateForm(event)">
@@ -71,7 +73,7 @@
             <input type="password" id="confirm_password" name="confirm_password" placeholder="Rishkruani password-in" required>
 
             <button type="submit">Regjistrohu</button>
-            <p class="login-link">Keni një llogari? <a href="login.html">Login</a></p>
+            <p class="login-link">Keni një llogari? <a href="login.php">Login</a></p>
         </form>
     </div>
 </body>

@@ -10,63 +10,129 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+    <title>User Dashboard - F&Y Mobile Shop</title>
     <link rel="stylesheet" href="nav.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            font-family: Arial, sans-serif;
             background-image: url("fotot e projektit/backgroundgreenblack.jfif");
+            background-size: cover;
+            background-attachment: fixed;
             color: white;
         }
+
         .dashboard-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: rgba(0, 0, 0, 0.7);
+            max-width: 1200px;
+            margin: 20px auto;
             padding: 20px;
-            border-radius: 10px;
         }
+
         .welcome-message {
             text-align: center;
             margin-bottom: 30px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
         }
-        .user-info {
-            margin-bottom: 20px;
+
+        .welcome-message h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
         }
-        .logout-btn {
-            background-color: #ff4444;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
+
+        .welcome-message p {
+            font-size: 18px;
+            color: #f4f4f4;
         }
-        .nav-links {
-            margin-top: 20px;
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
-        .nav-links a {
-            color: white;
-            margin-right: 15px;
-            text-decoration: none;
+
+        .dashboard-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
         }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .dashboard-card h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #4CAF50;
+        }
+
+        .dashboard-card p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
         .dashboard-nav {
             background-color: rgba(255, 255, 255, 0.1);
-            padding: 10px;
+            padding: 15px;
             border-radius: 5px;
             margin: 20px 0;
+            text-align: center;
         }
+
         .dashboard-nav a {
             color: white;
             text-decoration: none;
             padding: 8px 15px;
-            margin: 0 10px;
+            margin: 5px;
             border-radius: 5px;
+            display: inline-block;
             transition: background-color 0.3s ease;
         }
+
         .dashboard-nav a:hover {
             background-color: #4CAF50;
+        }
+
+        .recent-activity {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .recent-activity h2 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        .activity-item {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 10px;
+            }
+
+            .welcome-message h1 {
+                font-size: 24px;
+            }
+
+            .welcome-message p {
+                font-size: 16px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -79,28 +145,44 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
             <p>Mirësevini <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
         </div>
 
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h2>Profili Im</h2>
+                <p>Menaxhoni informacionet tuaja personale dhe preferencat</p>
+                <a href="edit_profile.php" class="dashboard-nav">Ndrysho Profilin</a>
+            </div>
+
+            <div class="dashboard-card">
+                <h2>Porositë e Mia</h2>
+                <p>Shikoni historinë e porosive dhe statusin aktual</p>
+                <a href="view_orders.php" class="dashboard-nav">Shiko Porositë</a>
+            </div>
+
+            <div class="dashboard-card">
+                <h2>Produktet e Preferuara</h2>
+                <p>Lista e produkteve të ruajtura për më vonë</p>
+                <a href="wishlist.php" class="dashboard-nav">Shiko Listën</a>
+            </div>
+        </div>
+
+        <div class="recent-activity">
+            <h2>Aktiviteti i Fundit</h2>
+            <div class="activity-item">
+                <p>Porosia #12345 është konfirmuar - 2 orë më parë</p>
+            </div>
+            <div class="activity-item">
+                <p>Keni shtuar iPhone 14 Pro në listën e dëshirave - 1 ditë më parë</p>
+            </div>
+            <div class="activity-item">
+                <p>Keni përditësuar profilin tuaj - 3 ditë më parë</p>
+            </div>
+        </div>
+
         <div class="dashboard-nav">
-            <a href="products.php">Shiko Produktet</a>
-            <a href="orders.php">Porositë e Mia</a>
-            <a href="profile.php">Profili Im</a>
-        </div>
-
-        <div class="user-info">
-            <?php
-            require_once 'config.php';
-            $stmt = $pdo->prepare("SELECT fullname, email FROM users WHERE id = ?");
-            $stmt->execute([$_SESSION['user_id']]);
-            $user = $stmt->fetch();
-            ?>
-            <h2>Të dhënat e profilit:</h2>
-            <p>Emri i plotë: <?php echo htmlspecialchars($user['fullname']); ?></p>
-            <p>Email: <?php echo htmlspecialchars($user['email']); ?></p>
-            <p>Username: <?php echo htmlspecialchars($_SESSION['username']); ?></p>
-        </div>
-
-        <div class="nav-links">
-            <a href="home.php">Kthehu në faqen kryesore</a>
-            <a href="logout.php" class="logout-btn">Logout</a>
+            <a href="edit_profile.php">Edit Profile</a>
+            <a href="view_orders.php">View Orders</a>
+            <a href="settings.php">Settings</a>
+            <a href="wishlist.php">Wishlist</a>
         </div>
     </div>
 </body>

@@ -7,6 +7,28 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 require_once 'config.php';
 
+// Në fillim të file-it, shtoni këtë funksion
+function addSystemLog($pdo, $action, $details, $product_id = null, $old_values = null, $new_values = null) {
+    try {
+        $stmt = $pdo->prepare("
+            INSERT INTO system_logs (user_id, action, details, product_id, old_values, new_values, ip_address) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        ");
+        $stmt->execute([
+            $_SESSION['user_id'],
+            $action,
+            $details,
+            $product_id,
+            $old_values ? json_encode($old_values, JSON_UNESCAPED_UNICODE) : null,
+            $new_values ? json_encode($new_values, JSON_UNESCAPED_UNICODE) : null,
+            $_SERVER['REMOTE_ADDR']
+        ]);
+    } catch (PDOException $e) {
+        // Log error ose handle sipas nevojës
+        error_log("Error in addSystemLog: " . $e->getMessage());
+    }
+}
+
 // Shto produkt të ri
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($_POST['action'] === 'add') {
@@ -29,14 +51,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         
         $stmt = $pdo->prepare("INSERT INTO products (name, description, price, image_url, stock) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([$name, $description, $price, $image_url, $stock]);
+        $product_id = $pdo->lastInsertId();
+
+        // Shtoni log
+        $new_values = [
+            'name' => $name,
+            'description' => $description,
+            'price' => $price,
+            'stock' => $stock,
+            'image_url' => $image_url
+        ];
+        addSystemLog($pdo, 'add_product', "Produkti u shtua: $name", $product_id, null, $new_values);
+
         header("Location: manage_products.php?success=added");
         exit();
     }
     
     // Fshi produkt
     elseif ($_POST['action'] === 'delete' && isset($_POST['product_id'])) {
+        // Merrni të dhënat e produktit para se të fshihet
+        $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
+        $stmt->execute([$_POST['product_id']]);
+        $old_product = $stmt->fetch();
+
+        // Shtoni log para fshirjes
+        addSystemLog($pdo, 'delete_product', 
+            "Produkti u fshi: " . $old_product['name'], 
+            null, // vendosim null për product_id pasi produkti do të fshihet
+            $old_product,
+            null
+        );
+
+        // Pastaj fshij produktin
         $stmt = $pdo->prepare("DELETE FROM products WHERE id = ?");
         $stmt->execute([$_POST['product_id']]);
+
         header("Location: manage_products.php?success=deleted");
         exit();
     }
