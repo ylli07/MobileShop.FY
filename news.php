@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech News</title>
+    <link rel="stylesheet" href="nav.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,25 +12,6 @@
             margin: 0;
             padding: 0;
             text-align: center;
-        }
-        header {
-            background-color: rgb(32, 31, 31);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-        }
-
-        header .navigacioni {
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        header nav a {
-            margin: 0 15px;
-            font-size: 20px;
-            color: white;
         }
         
         .container {
@@ -83,17 +65,7 @@
     </style>
 </head>
 <body>
-    <header>
-        <div id="home"class="navigacioni">Tech News</div>
-        <nav>
-            <a href="home.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="aboutus.html">About Us</a>
-            <a href="login.html">Login</a>
-            <a href="signup.html">Sign Up</a>
-        </nav>
-    </div>
-    </header>
+    <?php include 'nav.php'; ?>
     <div class="container">
         <h1>Latest Technology News</h1>
         <div class="slider">

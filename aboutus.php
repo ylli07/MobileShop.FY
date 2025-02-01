@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us-Mobile Shop</title>
+    <link rel="stylesheet" href="nav.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,32 +14,8 @@
             background-image: url("fotot e projektit/backgroundgreenblack.jfif");
         }
       
-        header {
-       display: flex;
-       justify-content: space-between;
-       align-items: center;
-       padding: 20px;
-       background-color:rgb(32, 31, 31);
-       width: auto;
-   
-        }
 
-        header .navigacioni {
-        font-size: 20px;
-        font-weight: bold;
-        color: white;
-    
-        }
-
-        header nav a {
-        margin: 20px 40px;
-        font-size: 20px;
-        color: white;
-         font-weight: bold;  
-
-    
-        }
-
+      
         .fy {
             background-image:url("fotot e projektit/backgroundgreenblack.jfif");
             color: white;
@@ -69,21 +46,12 @@
     </style>
     </head>
     <body>
-        <header>
-            <div id="home"class="navigacioni">F&Y Mobile Shop</div>
-            <nav>
-                <a href="home.html">Home</a>
-                <a href="products.html">Products</a>
-                <a href="news.html">News</a>
-                <a href="aboutus.html">About Us</a>
-                <a href="login.html">Login</a>
-                <a href="signup.html">Sign Up</a>
-            </nav>
-        </header>
+        <?php include 'nav.php'; ?>
         <div class="fy">
             <h1>Welcome to F&Y MobileShop</h1>
         </div>
         <div class="aboutus">
+
             <h2>About Us</h2>
             <p>Welcome to <strong>F&Y MobileShop</strong>, your one-stop destination for all your mobile and gadget needs. Located in the heart of Gjakova, we pride ourselves on offering the latest smartphones, accessories, and exceptional customer service.</p>
             <h2>Our Mission</h2>

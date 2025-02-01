@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Form</title>
+    <link rel="stylesheet" href="login.css">
+    <script>
+        function validateForm(event) {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var confirm_password = document.getElementById('confirm_password').value;
+            
+            if (password !== confirm_password) {
+                alert("Passwordet nuk përputhen!");
+                event.preventDefault();
+                return false;
+            }
+            
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="klasa-login">
+        <h1>Regjistrohu</h1>
+        <form action="register_process.php" method="POST" onsubmit="return validateForm(event)">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            
+            <label for="confirm_password">Konfirmo Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+            
+            <button type="submit">Regjistrohu</button>
+            <p class="login-link">Keni një llogari? <a href="login.html">Login</a></p>
+        </form>
+    </div>
+</body>
+</html> 

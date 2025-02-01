@@ -4,21 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F&Y Mobile Shop</title>
+    <link rel="stylesheet" href="nav.css">
     <link rel="stylesheet" href="home.css">
 </head>
 <body>
-    <header>
-        <div id="home"class="navigacioni">F&Y Mobile Shop</div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="products.html">Products</a>
-            <a href="aboutus.html">About Us</a>
-            <a href="news.html">News</a>
-            <a href="#contact">Contact</a>
-            <a href="login.html">Login</a>
-            <a href="signup.html">Sign Up</a>
-        </nav>
-    </header>
+    <?php include 'nav.php'; ?>
 
     <div id="home" class="ballina">
         <h1>Welcome to our MobileShop</h1>
@@ -114,6 +104,6 @@
         </div>
     <div>
     </footer>
-
+    <!-- Rest of the content... -->
 </body>
 </html> 
