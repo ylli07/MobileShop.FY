@@ -21,9 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     try {
         $stmt->execute([$fullname, $email, $username, $password]);
-        header("Location: login.html?registered=1");
+        header("Location: login.php?registered=1");
     } catch(PDOException $e) {
-        header("Location: signup.html?error=registration_failed");
+        header("Location: signup.php?error=registration_failed");
     }
 }
 ?> 

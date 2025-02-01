@@ -23,19 +23,10 @@ try {
     } else {
         $totalProducts = 0;
     }
-    
-    // Kontrollo nëse ekziston tabela orders
-    $stmt = $pdo->query("SHOW TABLES LIKE 'orders'");
-    if ($stmt->rowCount() > 0) {
-        $totalOrders = $pdo->query("SELECT COUNT(*) FROM orders")->fetchColumn();
-    } else {
-        $totalOrders = 0;
-    }
 } catch (PDOException $e) {
     // Në rast të ndonjë errori, vendos vlera default
-    $totalUsers = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
+    $totalUsers = 0;
     $totalProducts = 0;
-    $totalOrders = 0;
 }
 ?>
 
@@ -195,15 +186,10 @@ try {
                         <h4>Total Produkte</h4>
                         <p><?php echo $totalProducts; ?></p>
                     </div>
-                    <div class="stat-box">
-                        <h4>Total Porosi</h4>
-                        <p><?php echo $totalOrders; ?></p>
-                    </div>
                 </div>
 
                 <div class="admin-actions" style="margin-top: 30px;">
                     <a href="manage_products.php" class="admin-button">Menaxho Produktet</a>
-                    <a href="manage_orders.php" class="admin-button">Menaxho Porositë</a>
                     <a href="system_logs.php" class="admin-button">Shiko Logs</a>
                 </div>
             </div>

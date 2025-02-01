@@ -103,15 +103,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-image: url("fotot e projektit/backgroundgreenblack.jfif");
             color: white;
         }
         .container {
             max-width: 1200px;
             margin: 20px auto;
-            background-color: rgba(0, 0, 0, 0.7);
             padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
         }
         .product-form {

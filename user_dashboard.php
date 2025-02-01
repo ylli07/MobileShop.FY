@@ -1,10 +1,18 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
-    header("Location: login.html");
+    header("Location: login.php");
     exit();
 }
+
+require_once 'config.php';
+
+// Merr të dhënat e përdoruesit
+$stmt = $pdo->prepare("SELECT fullname, email, username, created_at FROM users WHERE id = ?");
+$stmt->execute([$_SESSION['user_id']]);
+$user = $stmt->fetch();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,175 +22,124 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
     <link rel="stylesheet" href="nav.css">
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
             background-image: url("fotot e projektit/backgroundgreenblack.jfif");
-            background-size: cover;
-            background-attachment: fixed;
             color: white;
+            min-height: 100vh;
         }
-
         .dashboard-container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
         }
-
-        .welcome-message {
-            text-align: center;
-            margin-bottom: 30px;
-            background-color: rgba(0, 0, 0, 0.5);
+        .user-info {
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 10px;
+            margin-bottom: 20px;
         }
-
-        .welcome-message h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .welcome-message p {
-            font-size: 18px;
-            color: #f4f4f4;
-        }
-
-        .dashboard-grid {
+        .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
+            margin-top: 20px;
         }
-
-        .dashboard-card {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .dashboard-card h2 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #4CAF50;
-        }
-
-        .dashboard-card p {
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-
-        .dashboard-nav {
+        .info-box {
             background-color: rgba(255, 255, 255, 0.1);
             padding: 15px;
             border-radius: 5px;
-            margin: 20px 0;
-            text-align: center;
         }
-
-        .dashboard-nav a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            margin: 5px;
-            border-radius: 5px;
-            display: inline-block;
-            transition: background-color 0.3s ease;
-        }
-
-        .dashboard-nav a:hover {
-            background-color: #4CAF50;
-        }
-
-        .recent-activity {
-            background-color: rgba(255, 255, 255, 0.1);
+        .quick-actions {
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 10px;
-            margin-top: 30px;
+            margin-bottom: 20px;
         }
-
-        .recent-activity h2 {
-            color: #4CAF50;
-            margin-bottom: 15px;
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
         }
-
-        .activity-item {
-            padding: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .action-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
-
-        @media (max-width: 768px) {
-            .dashboard-container {
-                padding: 10px;
-            }
-
-            .welcome-message h1 {
-                font-size: 24px;
-            }
-
-            .welcome-message p {
-                font-size: 16px;
-            }
-
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
+        .action-button:hover {
+            background-color: #45a049;
+        }
+        .latest-products {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .product-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <?php include 'nav.php'; ?>
-    
+
     <div class="dashboard-container">
-        <div class="welcome-message">
-            <h1>User Dashboard</h1>
-            <p>Mirësevini <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
-        </div>
-
-        <div class="dashboard-grid">
-            <div class="dashboard-card">
-                <h2>Profili Im</h2>
-                <p>Menaxhoni informacionet tuaja personale dhe preferencat</p>
-                <a href="edit_profile.php" class="dashboard-nav">Ndrysho Profilin</a>
-            </div>
-
-            <div class="dashboard-card">
-                <h2>Porositë e Mia</h2>
-                <p>Shikoni historinë e porosive dhe statusin aktual</p>
-                <a href="view_orders.php" class="dashboard-nav">Shiko Porositë</a>
-            </div>
-
-            <div class="dashboard-card">
-                <h2>Produktet e Preferuara</h2>
-                <p>Lista e produkteve të ruajtura për më vonë</p>
-                <a href="wishlist.php" class="dashboard-nav">Shiko Listën</a>
+        <div class="user-info">
+            <h2>Mirësevini, <?php echo htmlspecialchars($user['fullname']); ?>!</h2>
+            <div class="info-grid">
+                <div class="info-box">
+                    <p><strong>Username:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
+                </div>
+                <div class="info-box">
+                    <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+                </div>
+                <div class="info-box">
+                    <p><strong>Anëtar që nga:</strong> <?php echo date('d M Y', strtotime($user['created_at'])); ?></p>
+                </div>
             </div>
         </div>
 
-        <div class="recent-activity">
-            <h2>Aktiviteti i Fundit</h2>
-            <div class="activity-item">
-                <p>Porosia #12345 është konfirmuar - 2 orë më parë</p>
-            </div>
-            <div class="activity-item">
-                <p>Keni shtuar iPhone 14 Pro në listën e dëshirave - 1 ditë më parë</p>
-            </div>
-            <div class="activity-item">
-                <p>Keni përditësuar profilin tuaj - 3 ditë më parë</p>
+        <div class="quick-actions">
+            <h3>Veprime të Shpejta</h3>
+            <div class="action-buttons">
+                <a href="edit_profile.php" class="action-button">Ndrysho Profilin</a>
+                <a href="products.php" class="action-button">Shiko Produktet</a>
+                <a href="news.php" class="action-button">Lajmet e Fundit</a>
             </div>
         </div>
 
-        <div class="dashboard-nav">
-            <a href="edit_profile.php">Edit Profile</a>
-            <a href="view_orders.php">View Orders</a>
-            <a href="settings.php">Settings</a>
-            <a href="wishlist.php">Wishlist</a>
+        <div class="latest-products">
+            <h3>Produktet e Fundit</h3>
+            <div class="products-grid">
+                <?php
+                $stmt = $pdo->query("SELECT * FROM products ORDER BY id DESC LIMIT 4");
+                while ($product = $stmt->fetch()) {
+                    echo "<div class='product-card'>";
+                    if ($product['image_url']) {
+                        echo "<img src='" . htmlspecialchars($product['image_url']) . "' alt='" . htmlspecialchars($product['name']) . "'>";
+                    }
+                    echo "<h4>" . htmlspecialchars($product['name']) . "</h4>";
+                    echo "<p>$" . htmlspecialchars($product['price']) . "</p>";
+                    echo "</div>";
+                }
+                ?>
+            </div>
         </div>
     </div>
 </body>

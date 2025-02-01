@@ -1,8 +1,24 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.html");
+    header("Location: login.php");
     exit();
+}
+
+require_once 'config.php';
+
+// Fetch statistics
+try {
+    $totalUsers = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
+    $stmt = $pdo->query("SHOW TABLES LIKE 'products'");
+    if ($stmt->rowCount() > 0) {
+        $totalProducts = $pdo->query("SELECT COUNT(*) FROM products")->fetchColumn();
+    } else {
+        $totalProducts = 0;
+    }
+} catch (PDOException $e) {
+    $totalUsers = 0;
+    $totalProducts = 0;
 }
 ?>
 <!DOCTYPE html>
@@ -10,7 +26,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard - F&Y Mobile Shop</title>
     <link rel="stylesheet" href="nav.css">
     <style>
         body {
@@ -104,6 +120,99 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
             color: white;
             font-weight: bold;
         }
+
+        .stats-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-box {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-box h3 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .stat-box p {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 10px;
+                margin: 10px;
+            }
+
+            .stats-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .stat-box {
+                width: 100%;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            th, td {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .welcome-message h1 {
+                font-size: 24px;
+            }
+
+            .welcome-message p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-container {
+                padding: 5px;
+                margin: 5px;
+            }
+
+            .welcome-message h1 {
+                font-size: 20px;
+            }
+
+            .welcome-message p {
+                font-size: 14px;
+            }
+
+            .stat-box h3 {
+                font-size: 16px;
+            }
+
+            .stat-box p {
+                font-size: 20px;
+            }
+
+            th, td {
+                padding: 6px;
+                font-size: 12px;
+            }
+
+            .action-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -115,9 +224,19 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
             <p>Mirësevini <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
         </div>
 
+        <div class="stats-container">
+            <div class="stat-box">
+                <h3>Totali i përdoruesve</h3>
+                <p><?php echo $totalUsers; ?></p>
+            </div>
+            <div class="stat-box">
+                <h3>Totali i produkteve</h3>
+                <p><?php echo $totalProducts; ?></p>
+            </div>
+        </div>
+
         <h2>Lista e përdoruesve:</h2>
         <?php
-        require_once 'config.php';
         $stmt = $pdo->query("SELECT id, fullname, email, username, role, created_at FROM users");
         $users = $stmt->fetchAll();
         ?>

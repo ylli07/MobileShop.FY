@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: user_dashboard.php");
         }
     } else {
-        header("Location: login.html?error=1");
+        header("Location: login.php?error=1");
     }
 }
 ?> 
