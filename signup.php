@@ -18,6 +18,7 @@
             flex-direction: column;
             align-items: center;
         }
+        
 
         .klasa-login {
             background-color: rgba(0, 0, 0, 0.8);

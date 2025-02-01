@@ -17,5 +17,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id'])) {
     } catch(PDOException $e) {
         header("Location: admin_dashboard.php?error=delete_failed");
     }
-}
+} 
 ?> 

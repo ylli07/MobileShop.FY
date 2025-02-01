@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="nav.css">
     <link rel="stylesheet" href="home.css">
 </head>
+
 <body>
     <?php include 'nav.php'; ?>
 

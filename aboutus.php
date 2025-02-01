@@ -12,7 +12,7 @@
             margin: 0;
             padding: 0;
             background-image: url("fotot e projektit/backgroundgreenblack.jfif");
-        }
+        }  
       
 
       

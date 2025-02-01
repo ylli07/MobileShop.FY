@@ -27,6 +27,7 @@ function addSystemLog($pdo, $action, $details, $product_id = null, $old_values =
         // Log error ose handle sipas nevojës
         error_log("Error in addSystemLog: " . $e->getMessage());
     }
+    
 }
 
 // Shto produkt të ri

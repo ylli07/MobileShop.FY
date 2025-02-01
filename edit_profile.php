@@ -4,7 +4,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
-
+    
 require_once 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

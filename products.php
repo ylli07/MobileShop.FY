@@ -17,6 +17,7 @@ session_start();
             background-attachment: fixed;
             min-height: 100vh;
         }
+        
 
         .klasa-produkteve {
             max-width: 1200px;

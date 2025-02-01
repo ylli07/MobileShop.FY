@@ -13,6 +13,7 @@ $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
